@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -14,7 +13,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       {/* Sidebar */}
       <aside className="hidden md:flex w-64 flex-col fixed inset-y-0 z-50 bg-card border-r border-border">
         <div className="px-6 py-6">
-          <h1 className="text-2xl font-bold tracking-tight">Finanças<span className="text-primary">Lytics</span></h1>
+          <h1 className="text-2xl font-bold tracking-tight">PR <span className="text-primary">Radiadores</span></h1>
           <p className="text-sm text-muted-foreground mt-1">Painel Financeiro</p>
         </div>
         
@@ -49,7 +48,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       {/* Mobile header */}
       <div className="md:hidden fixed inset-x-0 top-0 z-50 bg-card border-b border-border p-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold tracking-tight">Finanças<span className="text-primary">Lytics</span></h1>
+          <h1 className="text-xl font-bold tracking-tight">PR <span className="text-primary">Radiadores</span></h1>
           <Button variant="outline" size="icon">
             <Home size={18} />
           </Button>
