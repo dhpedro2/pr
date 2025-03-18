@@ -1,4 +1,3 @@
-
 import React, { useMemo } from 'react';
 import { useTransactions } from '@/context/TransactionContext';
 import { formatCurrency, getMonthName } from '@/utils/dateUtils';
@@ -36,8 +35,8 @@ const Charts = () => {
     const expense = transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
     
     return [
-      { name: 'Income', value: income },
-      { name: 'Expense', value: expense },
+      { name: 'Receita', value: income },
+      { name: 'Despesa', value: expense },
     ];
   }, [transactions]);
 
@@ -97,7 +96,7 @@ const Charts = () => {
       {/* Monthly Income/Expense Chart */}
       <Card className="border border-border shadow-soft hover:shadow-medium transition-shadow duration-300 animate-fade-in">
         <CardHeader>
-          <CardTitle>Monthly Income & Expenses</CardTitle>
+          <CardTitle>Receitas & Despesas Mensais</CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
           <ResponsiveContainer width="100%" height={300}>
@@ -106,8 +105,8 @@ const Charts = () => {
               <XAxis dataKey="month" />
               <YAxis />
               <Tooltip content={<CustomTooltip />} />
-              <Bar dataKey="income" fill="#34D399" name="Income" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="expense" fill="#F87171" name="Expense" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="income" fill="#34D399" name="Receita" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="expense" fill="#F87171" name="Despesa" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
@@ -116,7 +115,7 @@ const Charts = () => {
       {/* Income/Expense Distribution */}
       <Card className="border border-border shadow-soft hover:shadow-medium transition-shadow duration-300 animate-fade-in">
         <CardHeader>
-          <CardTitle>Income & Expense Distribution</CardTitle>
+          <CardTitle>Distribuição de Receitas & Despesas</CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
           <ResponsiveContainer width="100%" height={300}>
@@ -144,7 +143,7 @@ const Charts = () => {
       {/* Daily Balance Trend */}
       <Card className="border border-border shadow-soft hover:shadow-medium transition-shadow duration-300 animate-fade-in col-span-1 lg:col-span-2">
         <CardHeader>
-          <CardTitle>Daily Balance Trend (Current Month)</CardTitle>
+          <CardTitle>Tendência de Saldo Diário (Mês Atual)</CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
           <ResponsiveContainer width="100%" height={300}>

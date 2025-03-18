@@ -13,9 +13,9 @@ const Index = () => {
       <DashboardLayout>
         <div className="space-y-6 animate-fade-in">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+            <h1 className="text-3xl font-bold tracking-tight">Painel</h1>
             <p className="text-muted-foreground mt-1">
-              Financial overview for {getCurrentMonthAndYear()}
+              Visão financeira para {getCurrentMonthAndYear()}
             </p>
           </div>
           

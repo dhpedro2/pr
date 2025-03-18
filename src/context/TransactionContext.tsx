@@ -37,9 +37,9 @@ export const TransactionProvider = ({ children }: TransactionProviderProps) => {
         }));
         setTransactions(parsed);
       } catch (error) {
-        console.error('Error parsing transactions:', error);
+        console.error('Erro ao analisar transações:', error);
         toast({
-          title: "Error loading saved transactions",
+          title: "Erro ao carregar transações salvas",
           variant: "destructive"
         });
       }
@@ -61,7 +61,7 @@ export const TransactionProvider = ({ children }: TransactionProviderProps) => {
     
     setTransactions(prev => [...prev, newTransaction]);
     toast({
-      title: `${transaction.type === 'income' ? 'Income' : 'Expense'} added`,
+      title: `${transaction.type === 'income' ? 'Receita' : 'Despesa'} adicionada`,
       description: formatCurrency(transaction.amount)
     });
   };
@@ -71,14 +71,14 @@ export const TransactionProvider = ({ children }: TransactionProviderProps) => {
       prev.map(t => t.id === updatedTransaction.id ? updatedTransaction : t)
     );
     toast({
-      title: "Transaction updated"
+      title: "Transação atualizada"
     });
   };
 
   const deleteTransaction = (id: string) => {
     setTransactions(prev => prev.filter(t => t.id !== id));
     toast({
-      title: "Transaction deleted"
+      title: "Transação excluída"
     });
   };
 
@@ -168,7 +168,7 @@ export const TransactionProvider = ({ children }: TransactionProviderProps) => {
 export const useTransactions = () => {
   const context = useContext(TransactionContext);
   if (context === undefined) {
-    throw new Error('useTransactions must be used within a TransactionProvider');
+    throw new Error('useTransactions deve ser usado dentro de um TransactionProvider');
   }
   return context;
 };

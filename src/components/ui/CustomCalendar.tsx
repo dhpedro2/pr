@@ -2,6 +2,7 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
+import { ptBR } from 'date-fns/locale';
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -20,7 +21,7 @@ export function CustomCalendar({
   setDate,
   label,
   className,
-  placeholder = "Select date"
+  placeholder = "Selecione a data"
 }: DatePickerProps) {
   return (
     <div className="space-y-2">
@@ -41,7 +42,7 @@ export function CustomCalendar({
             )}
           >
             <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />
-            {date ? format(date, "PPP") : <span>{placeholder}</span>}
+            {date ? format(date, "PPP", { locale: ptBR }) : <span>{placeholder}</span>}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
@@ -50,6 +51,7 @@ export function CustomCalendar({
             selected={date}
             onSelect={setDate}
             initialFocus
+            locale={ptBR}
             className="p-3 pointer-events-auto rounded-lg border border-border shadow-medium"
           />
         </PopoverContent>

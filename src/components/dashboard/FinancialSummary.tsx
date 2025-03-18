@@ -11,42 +11,42 @@ const FinancialSummary = () => {
 
   const summaryCards = [
     {
-      title: 'Current Balance',
+      title: 'Saldo Atual',
       value: summary.netBalance,
       icon: <Wallet className="h-6 w-6" />,
       className: 'bg-primary/5',
       iconClass: 'text-primary',
     },
     {
-      title: 'Total Income',
+      title: 'Receita Total',
       value: summary.totalIncome,
       icon: <ArrowUpRight className="h-6 w-6" />,
       className: 'bg-green-50',
       iconClass: 'text-income',
     },
     {
-      title: 'Total Expenses',
+      title: 'Despesas Totais',
       value: summary.totalExpense,
       icon: <ArrowDownRight className="h-6 w-6" />,
       className: 'bg-red-50',
       iconClass: 'text-expense',
     },
     {
-      title: 'Daily Profit',
+      title: 'Lucro Diário',
       value: summary.dailyProfit,
       icon: <Calendar className="h-6 w-6" />,
       className: 'bg-blue-50',
       iconClass: 'text-blue-500',
     },
     {
-      title: 'Monthly Profit',
+      title: 'Lucro Mensal',
       value: summary.monthlyProfit,
       icon: <TrendingUp className="h-6 w-6" />,
       className: 'bg-purple-50',
       iconClass: 'text-purple-500',
     },
     {
-      title: 'Yearly Profit',
+      title: 'Lucro Anual',
       value: summary.yearlyProfit,
       icon: <TrendingDown className="h-6 w-6" />,
       className: 'bg-amber-50',

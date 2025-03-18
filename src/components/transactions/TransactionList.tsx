@@ -80,9 +80,9 @@ const TransactionList = () => {
 
   // Export transactions as CSV
   const exportTransactions = () => {
-    const csvHeader = 'Date,Description,Amount,Type\n';
+    const csvHeader = 'Data,Descrição,Valor,Tipo\n';
     const csvContent = filteredTransactions.map(t => {
-      return `${formatDate(t.date)},"${t.description}",${t.amount},${t.type}`;
+      return `${formatDate(t.date)},"${t.description}",${t.amount},${t.type === 'income' ? 'Receita' : 'Despesa'}`;
     }).join('\n');
     
     const csvData = csvHeader + csvContent;
@@ -91,7 +91,7 @@ const TransactionList = () => {
     
     const link = document.createElement('a');
     link.setAttribute('href', url);
-    link.setAttribute('download', 'transactions.csv');
+    link.setAttribute('download', 'transacoes.csv');
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
@@ -102,11 +102,11 @@ const TransactionList = () => {
     <Card className="shadow-soft border border-border">
       <CardHeader>
         <CardTitle className="flex justify-between items-center">
-          <span>Transactions</span>
+          <span>Transações</span>
           <TransactionForm />
         </CardTitle>
         <CardDescription>
-          Manage and view your transaction history
+          Gerencie e visualize seu histórico de transações
         </CardDescription>
       </CardHeader>
       
@@ -118,7 +118,7 @@ const TransactionList = () => {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
-                  placeholder="Search transactions..."
+                  placeholder="Pesquisar transações..."
                   value={searchTerm}
                   onChange={handleSearch}
                   className="pl-10 h-12"
@@ -128,12 +128,12 @@ const TransactionList = () => {
             
             <Select value={selectedType} onValueChange={handleTypeChange}>
               <SelectTrigger className="h-12">
-                <SelectValue placeholder="All types" />
+                <SelectValue placeholder="Todos os tipos" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All types</SelectItem>
-                <SelectItem value="income">Income</SelectItem>
-                <SelectItem value="expense">Expense</SelectItem>
+                <SelectItem value="all">Todos os tipos</SelectItem>
+                <SelectItem value="income">Receita</SelectItem>
+                <SelectItem value="expense">Despesa</SelectItem>
               </SelectContent>
             </Select>
             
@@ -143,7 +143,7 @@ const TransactionList = () => {
                 className="flex-1 h-12" 
                 onClick={resetFilters}
               >
-                Reset
+                Resetar
               </Button>
               <Button 
                 variant="outline" 
@@ -159,14 +159,14 @@ const TransactionList = () => {
             <CustomCalendar
               date={startDate}
               setDate={handleStartDateChange}
-              label="Start Date"
-              placeholder="From date"
+              label="Data Inicial"
+              placeholder="Data inicial"
             />
             <CustomCalendar
               date={endDate}
               setDate={handleEndDateChange}
-              label="End Date"
-              placeholder="To date"
+              label="Data Final"
+              placeholder="Data final"
             />
           </div>
           
@@ -174,7 +174,7 @@ const TransactionList = () => {
           <div className="space-y-2 mt-4">
             {filteredTransactions.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
-                No transactions found. Add a new transaction to get started.
+                Nenhuma transação encontrada. Adicione uma nova transação para começar.
               </div>
             ) : (
               filteredTransactions.map((transaction) => (
@@ -191,7 +191,7 @@ const TransactionList = () => {
       
       <CardFooter className="flex justify-between">
         <div className="text-sm text-muted-foreground">
-          Showing {filteredTransactions.length} of {transactions.length} transactions
+          Mostrando {filteredTransactions.length} de {transactions.length} transações
         </div>
       </CardFooter>
     </Card>
@@ -234,7 +234,7 @@ const TransactionItem = ({
             {transaction.type === 'income' ? '+' : '-'} {formatCurrency(transaction.amount)}
           </p>
           <Badge variant="outline" className="text-xs">
-            {transaction.type === 'income' ? 'Income' : 'Expense'}
+            {transaction.type === 'income' ? 'Receita' : 'Despesa'}
           </Badge>
         </div>
         
@@ -249,18 +249,18 @@ const TransactionItem = ({
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                <AlertDialogTitle>Tem certeza?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This will permanently delete this transaction. This action cannot be undone.
+                  Isso irá excluir permanentemente esta transação. Esta ação não pode ser desfeita.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogCancel>Cancelar</AlertDialogCancel>
                 <AlertDialogAction 
                   onClick={() => onDelete(transaction.id)}
                   className="bg-destructive hover:bg-destructive/90"
                 >
-                  Delete
+                  Excluir
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>

@@ -14,34 +14,34 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       {/* Sidebar */}
       <aside className="hidden md:flex w-64 flex-col fixed inset-y-0 z-50 bg-card border-r border-border">
         <div className="px-6 py-6">
-          <h1 className="text-2xl font-bold tracking-tight">Finance<span className="text-primary">Lytics</span></h1>
-          <p className="text-sm text-muted-foreground mt-1">Financial Dashboard</p>
+          <h1 className="text-2xl font-bold tracking-tight">Finanças<span className="text-primary">Lytics</span></h1>
+          <p className="text-sm text-muted-foreground mt-1">Painel Financeiro</p>
         </div>
         
         <nav className="flex-1 px-4 space-y-1 mt-4">
           <NavItem icon={<Home size={18} />} href="#" isActive>
-            Dashboard
+            Painel
           </NavItem>
           <NavItem icon={<CreditCard size={18} />} href="#">
-            Transactions
+            Transações
           </NavItem>
           <NavItem icon={<BarChart3 size={18} />} href="#">
-            Reports
+            Relatórios
           </NavItem>
           <NavItem icon={<User size={18} />} href="#">
-            Profile
+            Perfil
           </NavItem>
           <NavItem icon={<Settings size={18} />} href="#">
-            Settings
+            Configurações
           </NavItem>
         </nav>
         
         <div className="mt-auto px-4 py-4 border-t border-border">
           <NavItem icon={<HelpCircle size={18} />} href="#">
-            Help & Support
+            Ajuda & Suporte
           </NavItem>
           <NavItem icon={<LogOut size={18} />} href="#">
-            Log out
+            Sair
           </NavItem>
         </div>
       </aside>
@@ -49,7 +49,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       {/* Mobile header */}
       <div className="md:hidden fixed inset-x-0 top-0 z-50 bg-card border-b border-border p-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold tracking-tight">Finance<span className="text-primary">Lytics</span></h1>
+          <h1 className="text-xl font-bold tracking-tight">Finanças<span className="text-primary">Lytics</span></h1>
           <Button variant="outline" size="icon">
             <Home size={18} />
           </Button>

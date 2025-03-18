@@ -92,20 +92,20 @@ const TransactionForm = ({ editTransaction, onComplete }: TransactionFormProps) 
     setErrors({ description: false, amount: false, date: false });
   };
 
-  const dialogTitle = editTransaction ? 'Edit Transaction' : 'Add New Transaction';
-  const buttonText = editTransaction ? 'Update' : 'Add';
+  const dialogTitle = editTransaction ? 'Editar Transação' : 'Adicionar Nova Transação';
+  const buttonText = editTransaction ? 'Atualizar' : 'Adicionar';
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {editTransaction ? (
           <Button variant="ghost" size="sm" className="h-8 gap-1">
-            Edit
+            Editar
           </Button>
         ) : (
           <Button className="gap-1.5 animate-fade-in">
             <PlusCircle className="h-4 w-4" />
-            Add Transaction
+            Adicionar Transação
           </Button>
         )}
       </DialogTrigger>
@@ -113,7 +113,7 @@ const TransactionForm = ({ editTransaction, onComplete }: TransactionFormProps) 
         <DialogHeader>
           <DialogTitle>{dialogTitle}</DialogTitle>
           <DialogDescription>
-            Fill in the details below to record your transaction.
+            Preencha os detalhes abaixo para registrar sua transação.
           </DialogDescription>
         </DialogHeader>
         
@@ -122,35 +122,35 @@ const TransactionForm = ({ editTransaction, onComplete }: TransactionFormProps) 
             <CustomCalendar
               date={date}
               setDate={setDate}
-              label="Date"
-              placeholder="Select transaction date"
+              label="Data"
+              placeholder="Selecione a data da transação"
             />
-            {errors.date && <p className="text-destructive text-sm">Please select a date</p>}
+            {errors.date && <p className="text-destructive text-sm">Por favor, selecione uma data</p>}
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="description">Descrição</Label>
             <Input
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="e.g., Office supplies, Client payment"
+              placeholder="ex: Material de escritório, Pagamento de cliente"
               className={cn(
                 "h-12 transition-all duration-200",
                 errors.description && "border-destructive focus-visible:ring-destructive"
               )}
             />
-            {errors.description && <p className="text-destructive text-sm">Please enter a description</p>}
+            {errors.description && <p className="text-destructive text-sm">Por favor, insira uma descrição</p>}
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="amount">Amount</Label>
+            <Label htmlFor="amount">Valor</Label>
             <Input
               id="amount"
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              placeholder="0.00"
+              placeholder="0,00"
               step="0.01"
               min="0"
               className={cn(
@@ -158,21 +158,21 @@ const TransactionForm = ({ editTransaction, onComplete }: TransactionFormProps) 
                 errors.amount && "border-destructive focus-visible:ring-destructive"
               )}
             />
-            {errors.amount && <p className="text-destructive text-sm">Please enter a valid amount</p>}
+            {errors.amount && <p className="text-destructive text-sm">Por favor, insira um valor válido</p>}
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="type">Transaction Type</Label>
+            <Label htmlFor="type">Tipo de Transação</Label>
             <Select
               value={type}
               onValueChange={(value) => setType(value as TransactionType)}
             >
               <SelectTrigger className="h-12 transition-all duration-200">
-                <SelectValue placeholder="Select transaction type" />
+                <SelectValue placeholder="Selecione o tipo de transação" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="income" className="text-income font-medium">Income</SelectItem>
-                <SelectItem value="expense" className="text-expense font-medium">Expense</SelectItem>
+                <SelectItem value="income" className="text-income font-medium">Receita</SelectItem>
+                <SelectItem value="expense" className="text-expense font-medium">Despesa</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -188,7 +188,7 @@ const TransactionForm = ({ editTransaction, onComplete }: TransactionFormProps) 
               className="gap-1"
             >
               <XCircle className="h-4 w-4" />
-              Cancel
+              Cancelar
             </Button>
             <Button type="submit" className="gap-1">
               <PlusCircle className="h-4 w-4" />
