@@ -1,7 +1,6 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Transaction, TransactionType, TransactionFilters, FinancialSummary } from '@/types';
-import { toast } from '@/components/ui/sonner';
+import { toast } from "@/hooks/use-toast";
 import { formatCurrency } from '@/utils/dateUtils';
 
 interface TransactionContextType {
@@ -27,12 +26,10 @@ export const TransactionProvider = ({ children }: TransactionProviderProps) => {
   const [filters, setFilters] = useState<TransactionFilters>({});
   const [loading, setLoading] = useState(true);
 
-  // Load transactions from localStorage on mount
   useEffect(() => {
     const savedTransactions = localStorage.getItem('transactions');
     if (savedTransactions) {
       try {
-        // Convert date strings to Date objects when loading from storage
         const parsed = JSON.parse(savedTransactions).map((t: any) => ({
           ...t,
           date: new Date(t.date)
@@ -46,7 +43,6 @@ export const TransactionProvider = ({ children }: TransactionProviderProps) => {
     setLoading(false);
   }, []);
 
-  // Save transactions to localStorage whenever they change
   useEffect(() => {
     if (!loading) {
       localStorage.setItem('transactions', JSON.stringify(transactions));
@@ -60,34 +56,37 @@ export const TransactionProvider = ({ children }: TransactionProviderProps) => {
     };
     
     setTransactions(prev => [...prev, newTransaction]);
-    toast.success(`${transaction.type === 'income' ? 'Income' : 'Expense'} added: ${formatCurrency(transaction.amount)}`);
+    toast({
+      title: `${transaction.type === 'income' ? 'Income' : 'Expense'} added`,
+      description: formatCurrency(transaction.amount)
+    });
   };
 
   const updateTransaction = (updatedTransaction: Transaction) => {
     setTransactions(prev => 
       prev.map(t => t.id === updatedTransaction.id ? updatedTransaction : t)
     );
-    toast.success('Transaction updated');
+    toast({
+      title: "Transaction updated"
+    });
   };
 
   const deleteTransaction = (id: string) => {
     setTransactions(prev => prev.filter(t => t.id !== id));
-    toast.success('Transaction deleted');
+    toast({
+      title: "Transaction deleted"
+    });
   };
 
   const getFilteredTransactions = (filters: TransactionFilters): Transaction[] => {
     return transactions.filter(transaction => {
-      // Filter by date range
       if (filters.startDate && new Date(transaction.date) < filters.startDate) return false;
       if (filters.endDate && new Date(transaction.date) > filters.endDate) return false;
 
-      // Filter by type
       if (filters.type && transaction.type !== filters.type) return false;
 
-      // Filter by category
       if (filters.category && transaction.category !== filters.category) return false;
 
-      // Filter by search term
       if (filters.searchTerm && 
           !transaction.description.toLowerCase().includes(filters.searchTerm.toLowerCase())) return false;
 
@@ -101,7 +100,6 @@ export const TransactionProvider = ({ children }: TransactionProviderProps) => {
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
     const startOfYear = new Date(now.getFullYear(), 0, 1);
 
-    // All transactions
     const allIncome = transactions
       .filter(t => t.type === 'income')
       .reduce((sum, t) => sum + t.amount, 0);
@@ -110,7 +108,6 @@ export const TransactionProvider = ({ children }: TransactionProviderProps) => {
       .filter(t => t.type === 'expense')
       .reduce((sum, t) => sum + t.amount, 0);
 
-    // Daily transactions
     const dailyIncome = transactions
       .filter(t => t.type === 'income' && new Date(t.date) >= startOfDay)
       .reduce((sum, t) => sum + t.amount, 0);
@@ -119,7 +116,6 @@ export const TransactionProvider = ({ children }: TransactionProviderProps) => {
       .filter(t => t.type === 'expense' && new Date(t.date) >= startOfDay)
       .reduce((sum, t) => sum + t.amount, 0);
 
-    // Monthly transactions
     const monthlyIncome = transactions
       .filter(t => t.type === 'income' && new Date(t.date) >= startOfMonth)
       .reduce((sum, t) => sum + t.amount, 0);
@@ -128,7 +124,6 @@ export const TransactionProvider = ({ children }: TransactionProviderProps) => {
       .filter(t => t.type === 'expense' && new Date(t.date) >= startOfMonth)
       .reduce((sum, t) => sum + t.amount, 0);
 
-    // Yearly transactions
     const yearlyIncome = transactions
       .filter(t => t.type === 'income' && new Date(t.date) >= startOfYear)
       .reduce((sum, t) => sum + t.amount, 0);
