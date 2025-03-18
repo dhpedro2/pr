@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Transaction, TransactionType, TransactionFilters, FinancialSummary } from '@/types';
 import { toast } from "@/hooks/use-toast";
@@ -37,7 +38,10 @@ export const TransactionProvider = ({ children }: TransactionProviderProps) => {
         setTransactions(parsed);
       } catch (error) {
         console.error('Error parsing transactions:', error);
-        toast.error('Error loading saved transactions');
+        toast({
+          title: "Error loading saved transactions",
+          variant: "destructive"
+        });
       }
     }
     setLoading(false);
