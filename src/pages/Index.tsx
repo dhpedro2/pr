@@ -1,13 +1,30 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from 'react';
+import DashboardLayout from '@/components/layout/DashboardLayout';
+import FinancialSummary from '@/components/dashboard/FinancialSummary';
+import Charts from '@/components/dashboard/Charts';
+import TransactionList from '@/components/transactions/TransactionList';
+import { TransactionProvider } from '@/context/TransactionContext';
+import { getCurrentMonthAndYear } from '@/utils/dateUtils';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <TransactionProvider>
+      <DashboardLayout>
+        <div className="space-y-6 animate-fade-in">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+            <p className="text-muted-foreground mt-1">
+              Financial overview for {getCurrentMonthAndYear()}
+            </p>
+          </div>
+          
+          <FinancialSummary />
+          <Charts />
+          <TransactionList />
+        </div>
+      </DashboardLayout>
+    </TransactionProvider>
   );
 };
 
